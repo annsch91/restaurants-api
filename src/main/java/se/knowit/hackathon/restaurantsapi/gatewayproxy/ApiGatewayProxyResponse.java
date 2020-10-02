@@ -17,10 +17,11 @@ public class ApiGatewayProxyResponse {
     private String body;
     private boolean isBase64Encoded;
 
-    public ApiGatewayProxyResponse() {}
+    public ApiGatewayProxyResponse() {
+    }
 
-    public ApiGatewayProxyResponse withBody(Object obj) throws JsonProcessingException {
-        body = new ObjectMapper().writer().writeValueAsString(obj);
-        return this;
+    public static ApiGatewayProxyResponse withBody(Object obj) throws JsonProcessingException {
+        String body = new ObjectMapper().writer().writeValueAsString(obj);
+        return new ApiGatewayProxyResponse(200, Map.of(), body, false);
     }
 }

@@ -13,5 +13,7 @@ class RequestHandlerTest {
     void handleGet() {
         ApiGatewayProxyResponse response = handler.handleGet(null, null);
         assertNotNull(response);
+        assertEquals(200, response.getStatusCode());
+        assertTrue(response.getBody().length() > 100);
     }
 }
