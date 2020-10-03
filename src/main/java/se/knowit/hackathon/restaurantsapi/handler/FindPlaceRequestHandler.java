@@ -8,8 +8,6 @@ import se.knowit.hackathon.restaurantsapi.model.GoogleNearbyPlaces;
 import se.knowit.hackathon.restaurantsapi.service.GooglePlacesService;
 import se.knowit.hackathon.restaurantsapi.service.GooglePlacesServiceImpl;
 
-import java.util.Map;
-
 public class FindPlaceRequestHandler implements RequestHandler<ApiGatewayProxyRequest, ApiGatewayProxyResponse> {
 
     private final GooglePlacesService service = new GooglePlacesServiceImpl();
@@ -17,10 +15,10 @@ public class FindPlaceRequestHandler implements RequestHandler<ApiGatewayProxyRe
     @Override
     public ApiGatewayProxyResponse handleRequest(ApiGatewayProxyRequest request, Context context) {
         System.out.println("request: " + request);
-        Map<String, String> parameters = request.getQueryStringParameters();
-        String lat = parameters.getOrDefault("lat", "40.396410");
-        String lon = parameters.getOrDefault("long", "49.883788");
-        String radius = parameters.getOrDefault("radius", "3000");
+        System.out.println("context: " + context);
+        String lat = request.getLatitude().isEmpty() ? "40.396410" : request.getLatitude();
+        String lon = request.getLongitude().isEmpty() ? "49.883788" : request.getLongitude();
+        String radius = request.getRadius().isEmpty() ? "3000" : request.getRadius();
 
         GoogleNearbyPlaces place = service.findPlace(lat, lon, radius);
         return new ApiGatewayProxyResponse(200, place);

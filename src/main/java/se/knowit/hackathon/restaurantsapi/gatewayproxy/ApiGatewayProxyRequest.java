@@ -1,20 +1,14 @@
 package se.knowit.hackathon.restaurantsapi.gatewayproxy;
 
-import com.amazonaws.services.lambda.runtime.Context;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.Map;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ApiGatewayProxyRequest {
-    private String resource;
-    private String path;
-    private String httpMethod;
-    private Map<String, String> headers;
-    private Map<String, String> queryStringParameters;
-    private Map<String, String> pathParameters;
-    private Map<String, String> stageVariables;
-    private Context context;
-    private String body;
-    private Boolean isBase64Encoded;
+    private String latitude;
+    private String longitude;
+    private String radius;
 }
