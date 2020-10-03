@@ -8,15 +8,15 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RequestHandlerTest {
+class FindPlaceRequestHandlerTest {
 
-    private final RequestHandler handler = new RequestHandler();
+    private final FindPlaceRequestHandler handler = new FindPlaceRequestHandler();
 
     @Test
     void handleGet() {
         ApiGatewayProxyRequest request = new ApiGatewayProxyRequest();
         request.setQueryStringParameters(Map.of());
-        ApiGatewayProxyResponse response = handler.handleGet(request, null);
+        ApiGatewayProxyResponse response = handler.handleRequest(request, null);
         assertNotNull(response);
         assertEquals(200, response.getStatusCode());
         assertTrue(response.getBody().getResults().size() > 1);
