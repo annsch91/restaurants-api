@@ -7,13 +7,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RequestHandlerTest {
 
-    private RequestHandler handler = new RequestHandler();
+    private final RequestHandler handler = new RequestHandler();
 
     @Test
     void handleGet() {
         ApiGatewayProxyResponse response = handler.handleGet(null, null);
         assertNotNull(response);
         assertEquals(200, response.getStatusCode());
-        assertTrue(response.getBody().length() > 100);
+        assertTrue(response.getBody().getResults().size() > 1);
     }
 }

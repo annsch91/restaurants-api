@@ -1,7 +1,6 @@
 package se.knowit.hackathon.restaurantsapi.handler;
 
 import com.amazonaws.services.lambda.runtime.Context;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import se.knowit.hackathon.restaurantsapi.gatewayproxy.ApiGatewayProxyRequest;
 import se.knowit.hackathon.restaurantsapi.gatewayproxy.ApiGatewayProxyResponse;
 import se.knowit.hackathon.restaurantsapi.model.GoogleNearbyPlaces;
@@ -14,10 +13,6 @@ public class RequestHandler {
 
     public ApiGatewayProxyResponse handleGet(ApiGatewayProxyRequest request, Context context) {
         GoogleNearbyPlaces place = service.findPlace();
-        try {
-            return ApiGatewayProxyResponse.withBody(place);
-        } catch (JsonProcessingException e) {
-            throw new IllegalArgumentException();
-        }
+        return new ApiGatewayProxyResponse(200, place);
     }
 }
