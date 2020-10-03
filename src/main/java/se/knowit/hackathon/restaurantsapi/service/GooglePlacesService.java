@@ -4,6 +4,6 @@ import se.knowit.hackathon.restaurantsapi.model.GoogleNearbyPlaces;
 
 public interface GooglePlacesService {
 
-    GoogleNearbyPlaces findPlace();
+    GoogleNearbyPlaces findPlace(String lat, String lon, String radius);
 
 }

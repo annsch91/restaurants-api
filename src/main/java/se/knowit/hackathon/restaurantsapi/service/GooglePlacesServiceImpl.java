@@ -16,11 +16,11 @@ import java.net.URISyntaxException;
 public class GooglePlacesServiceImpl implements GooglePlacesService {
 
     @Override
-    public GoogleNearbyPlaces findPlace() {
+    public GoogleNearbyPlaces findPlace(String lat, String lon, String radius) {
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
         try {
-            String url = createUrl();
+            String url = createUrl(lat, lon, radius);
             CloseableHttpResponse response = httpClient.execute(new HttpGet(url));
             HttpEntity entity = response.getEntity();
             String jsonString = EntityUtils.toString(entity);
@@ -33,7 +33,7 @@ public class GooglePlacesServiceImpl implements GooglePlacesService {
         }
     }
 
-    private String createUrl() throws URISyntaxException {
+    private String createUrl(String lat, String lon, String radius) throws URISyntaxException {
         URIBuilder builder = new URIBuilder();
         builder.setScheme("https");
         builder.setHost("maps.googleapis.com");
@@ -41,8 +41,8 @@ public class GooglePlacesServiceImpl implements GooglePlacesService {
         builder.addParameter("keyword", "restaurants");
         builder.addParameter("type", "establishment");
         builder.addParameter("key", "AIzaSyBop6MXi5r3LIjHH5Goo5a-Rn4VOF7ElRI");
-        builder.addParameter("location", "59.61,16.57");
-        builder.addParameter("radius", "2000");
+        builder.addParameter("location", lat + "," + lon);
+        builder.addParameter("radius", radius);
         builder.addParameter("opennow", "true");
         return builder.build().toString();
     }
