@@ -1,4 +1,4 @@
-package se.knowit.hackathon.restaurantsapi.gatewayproxy;
+package se.knowit.hackathon.restaurantsapi.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,7 @@ import se.knowit.hackathon.restaurantsapi.model.GoogleNearbyPlaces;
 @With
 @AllArgsConstructor
 @NoArgsConstructor
-public class ApiGatewayProxyResponse {
+public class FindPlaceResponse {
     private int statusCode;
     private GoogleNearbyPlaces body;
 }
